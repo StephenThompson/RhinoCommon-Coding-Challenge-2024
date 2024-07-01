@@ -75,11 +75,11 @@ namespace MyRhinoPlugin
         /// </summary>
         public void DeleteLastBlock()
         {
-            if (_blocks.Count == 0) return;
-
-            TryDeleteLastBlock();
-            _doc.Views.Redraw();
-            UpdateStats();
+            if (TryDeleteLastBlock())
+            {
+                _doc.Views.Redraw();
+                UpdateStats();
+            }
         }
 
         /// <summary>
@@ -138,6 +138,9 @@ namespace MyRhinoPlugin
 
         private bool TryDeleteLastBlock()
         {
+            if (_blocks.Count == 0) 
+                return false;
+
             var lastAddedObject = _blocks.Last();
             _blocks.RemoveAt(_blocks.Count - 1);
 
