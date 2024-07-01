@@ -44,7 +44,6 @@ namespace MyRhinoPlugin
                 Name = $"Box_{_blockIterator}",
                 LayerIndex = 0,               
             };
-
             ++_blockIterator;
                         
             var box_guid = _doc.Objects.AddBox(box, attributes);

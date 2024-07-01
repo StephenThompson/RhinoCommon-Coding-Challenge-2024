@@ -34,27 +34,25 @@
             ButtonDeleteAll = new System.Windows.Forms.Button();
             button4 = new System.Windows.Forms.Button();
             label1 = new System.Windows.Forms.Label();
-            textBox1 = new System.Windows.Forms.TextBox();
-            textBox2 = new System.Windows.Forms.TextBox();
+            textBoxWidth = new System.Windows.Forms.TextBox();
+            blockSettingsBindingSource = new System.Windows.Forms.BindingSource(components);
+            textBoxLength = new System.Windows.Forms.TextBox();
             label2 = new System.Windows.Forms.Label();
-            textBox3 = new System.Windows.Forms.TextBox();
+            textBoxHeight = new System.Windows.Forms.TextBox();
             label3 = new System.Windows.Forms.Label();
-            textBox4 = new System.Windows.Forms.TextBox();
+            textBoxSpacing = new System.Windows.Forms.TextBox();
             label4 = new System.Windows.Forms.Label();
-            panel1 = new System.Windows.Forms.Panel();
-            panel2 = new System.Windows.Forms.Panel();
-            label6 = new System.Windows.Forms.Label();
-            panel3 = new System.Windows.Forms.Panel();
-            bindingSource1 = new System.Windows.Forms.BindingSource(components);
-            panel1.SuspendLayout();
-            panel2.SuspendLayout();
-            panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
+            groupBox1 = new System.Windows.Forms.GroupBox();
+            groupBox2 = new System.Windows.Forms.GroupBox();
+            groupBox3 = new System.Windows.Forms.GroupBox();
+            ((System.ComponentModel.ISupportInitialize)blockSettingsBindingSource).BeginInit();
+            groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
             SuspendLayout();
             // 
             // buttonAddBlock
             // 
-            buttonAddBlock.Location = new System.Drawing.Point(4, 3);
+            buttonAddBlock.Location = new System.Drawing.Point(7, 22);
             buttonAddBlock.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             buttonAddBlock.Name = "buttonAddBlock";
             buttonAddBlock.Size = new System.Drawing.Size(88, 27);
@@ -65,7 +63,7 @@
             // 
             // buttonDeleteLast
             // 
-            buttonDeleteLast.Location = new System.Drawing.Point(4, 70);
+            buttonDeleteLast.Location = new System.Drawing.Point(7, 89);
             buttonDeleteLast.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             buttonDeleteLast.Name = "buttonDeleteLast";
             buttonDeleteLast.Size = new System.Drawing.Size(88, 27);
@@ -76,7 +74,7 @@
             // 
             // ButtonDeleteAll
             // 
-            ButtonDeleteAll.Location = new System.Drawing.Point(4, 104);
+            ButtonDeleteAll.Location = new System.Drawing.Point(7, 123);
             ButtonDeleteAll.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ButtonDeleteAll.Name = "ButtonDeleteAll";
             ButtonDeleteAll.Size = new System.Drawing.Size(88, 27);
@@ -87,7 +85,7 @@
             // 
             // button4
             // 
-            button4.Location = new System.Drawing.Point(4, 37);
+            button4.Location = new System.Drawing.Point(7, 56);
             button4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             button4.Name = "button4";
             button4.Size = new System.Drawing.Size(88, 27);
@@ -98,139 +96,143 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(18, 9);
+            label1.Location = new System.Drawing.Point(18, 26);
             label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(42, 15);
             label1.TabIndex = 4;
             label1.Text = "Width:";
             // 
-            // textBox1
+            // textBoxWidth
             // 
-            textBox1.Location = new System.Drawing.Point(73, 3);
-            textBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(116, 23);
-            textBox1.TabIndex = 5;
+            textBoxWidth.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            textBoxWidth.DataBindings.Add(new System.Windows.Forms.Binding("Text", blockSettingsBindingSource, "Width"));
+            textBoxWidth.Location = new System.Drawing.Point(63, 23);
+            textBoxWidth.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBoxWidth.Name = "textBoxWidth";
+            textBoxWidth.Size = new System.Drawing.Size(116, 23);
+            textBoxWidth.TabIndex = 5;
             // 
-            // textBox2
+            // blockSettingsBindingSource
             // 
-            textBox2.Location = new System.Drawing.Point(73, 37);
-            textBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new System.Drawing.Size(116, 23);
-            textBox2.TabIndex = 7;
+            blockSettingsBindingSource.DataSource = typeof(BlockSettings);
+            // 
+            // textBoxLength
+            // 
+            textBoxLength.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            textBoxLength.DataBindings.Add(new System.Windows.Forms.Binding("Text", blockSettingsBindingSource, "Length"));
+            textBoxLength.Location = new System.Drawing.Point(63, 57);
+            textBoxLength.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBoxLength.Name = "textBoxLength";
+            textBoxLength.Size = new System.Drawing.Size(116, 23);
+            textBoxLength.TabIndex = 7;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(18, 43);
+            label2.Location = new System.Drawing.Point(13, 60);
             label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(47, 15);
             label2.TabIndex = 6;
             label2.Text = "Length:";
             // 
-            // textBox3
+            // textBoxHeight
             // 
-            textBox3.Location = new System.Drawing.Point(73, 73);
-            textBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new System.Drawing.Size(116, 23);
-            textBox3.TabIndex = 9;
+            textBoxHeight.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            textBoxHeight.DataBindings.Add(new System.Windows.Forms.Binding("Text", blockSettingsBindingSource, "Height"));
+            textBoxHeight.Location = new System.Drawing.Point(63, 93);
+            textBoxHeight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBoxHeight.Name = "textBoxHeight";
+            textBoxHeight.Size = new System.Drawing.Size(116, 23);
+            textBoxHeight.TabIndex = 9;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(18, 78);
+            label3.Location = new System.Drawing.Point(14, 96);
             label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(46, 15);
             label3.TabIndex = 8;
             label3.Text = "Height:";
             // 
-            // textBox4
+            // textBoxSpacing
             // 
-            textBox4.Location = new System.Drawing.Point(73, 106);
-            textBox4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new System.Drawing.Size(116, 23);
-            textBox4.TabIndex = 11;
+            textBoxSpacing.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            textBoxSpacing.DataBindings.Add(new System.Windows.Forms.Binding("Text", blockSettingsBindingSource, "Spacing"));
+            textBoxSpacing.Location = new System.Drawing.Point(63, 126);
+            textBoxSpacing.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBoxSpacing.Name = "textBoxSpacing";
+            textBoxSpacing.Size = new System.Drawing.Size(116, 23);
+            textBoxSpacing.TabIndex = 11;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(7, 112);
+            label4.Location = new System.Drawing.Point(8, 129);
             label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(52, 15);
             label4.TabIndex = 10;
             label4.Text = "Spacing:";
             // 
-            // panel1
+            // groupBox1
             // 
-            panel1.Controls.Add(textBox1);
-            panel1.Controls.Add(label1);
-            panel1.Controls.Add(label2);
-            panel1.Controls.Add(textBox4);
-            panel1.Controls.Add(textBox2);
-            panel1.Controls.Add(label4);
-            panel1.Controls.Add(label3);
-            panel1.Controls.Add(textBox3);
-            panel1.Location = new System.Drawing.Point(118, 9);
-            panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(197, 139);
-            panel1.TabIndex = 14;
+            groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            groupBox1.Location = new System.Drawing.Point(312, 9);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new System.Drawing.Size(185, 161);
+            groupBox1.TabIndex = 16;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Stats";
             // 
-            // panel2
+            // groupBox2
             // 
-            panel2.Controls.Add(buttonAddBlock);
-            panel2.Controls.Add(buttonDeleteLast);
-            panel2.Controls.Add(button4);
-            panel2.Controls.Add(ButtonDeleteAll);
-            panel2.Location = new System.Drawing.Point(14, 9);
-            panel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(97, 139);
-            panel2.TabIndex = 15;
+            groupBox2.Controls.Add(buttonAddBlock);
+            groupBox2.Controls.Add(buttonDeleteLast);
+            groupBox2.Controls.Add(ButtonDeleteAll);
+            groupBox2.Controls.Add(button4);
+            groupBox2.Location = new System.Drawing.Point(9, 9);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new System.Drawing.Size(102, 161);
+            groupBox2.TabIndex = 17;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Commands";
             // 
-            // label6
+            // groupBox3
             // 
-            label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(4, 3);
-            label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(32, 15);
-            label6.TabIndex = 16;
-            label6.Text = "Stats";
-            // 
-            // panel3
-            // 
-            panel3.Controls.Add(label6);
-            panel3.Location = new System.Drawing.Point(323, 9);
-            panel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(182, 139);
-            panel3.TabIndex = 17;
+            groupBox3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            groupBox3.Controls.Add(textBoxWidth);
+            groupBox3.Controls.Add(label1);
+            groupBox3.Controls.Add(textBoxHeight);
+            groupBox3.Controls.Add(label2);
+            groupBox3.Controls.Add(label3);
+            groupBox3.Controls.Add(textBoxSpacing);
+            groupBox3.Controls.Add(label4);
+            groupBox3.Controls.Add(textBoxLength);
+            groupBox3.Location = new System.Drawing.Point(117, 12);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new System.Drawing.Size(189, 158);
+            groupBox3.TabIndex = 17;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Values";
             // 
             // Form1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(519, 153);
-            Controls.Add(panel3);
-            Controls.Add(panel2);
-            Controls.Add(panel1);
+            ClientSize = new System.Drawing.Size(505, 177);
+            Controls.Add(groupBox3);
+            Controls.Add(groupBox2);
+            Controls.Add(groupBox1);
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "Form1";
             Text = "XFrame RhinoCommon-Coding-Challenge-2024";
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            panel2.ResumeLayout(false);
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)blockSettingsBindingSource).EndInit();
+            groupBox2.ResumeLayout(false);
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -241,17 +243,16 @@
         private System.Windows.Forms.Button ButtonDeleteAll;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBoxWidth;
+        private System.Windows.Forms.TextBox textBoxLength;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBoxHeight;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBoxSpacing;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.BindingSource blockSettingsBindingSource;
     }
 }

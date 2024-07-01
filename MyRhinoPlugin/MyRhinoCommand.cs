@@ -20,7 +20,8 @@ namespace MyRhinoPlugin
 
         protected override Result RunCommand(RhinoDoc doc, RunMode mode)
         {
-            Form1 form = new Form1(doc, mode);
+            var presenter = new FormPresenter(doc, mode);
+            Form1 form = new Form1(presenter);
             form.ShowDialog();
             return Result.Success;
         }
