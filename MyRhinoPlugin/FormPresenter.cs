@@ -7,9 +7,12 @@ using System.Linq;
 
 namespace MyRhinoPlugin
 {
-    public class FormPresenter
+    public class FormPresenter : ObservableObject
     {
         public BlockSettings Block { get; set; } = new BlockSettings();
+
+        private string _stats = string.Empty;
+        public string Stats { get => _stats; private set => SetProperty(ref _stats, value); }
 
         private List<SceneBlock> _blocks = new List<SceneBlock>();
         private int _blockIterator = 0;
@@ -28,7 +31,7 @@ namespace MyRhinoPlugin
             double halfLength = Block.HalfLength;
             double halfHeight = Block.HalfHeight;
 
-            double X = CalculateNextXAxisOffset(halfWidth);
+            double X = CalculateNextXAxisOffset(halfWidth, _blocks.Last());
             double Y = 0;
             double Z = 0;
 
@@ -49,10 +52,10 @@ namespace MyRhinoPlugin
             _doc.Views.Redraw();
         }
 
-        private double CalculateNextXAxisOffset(double halfWidth)
+        private double CalculateNextXAxisOffset(double halfWidth, SceneBlock previousBlock)
         {
-           return _blocks.Count == 0? 0 :
-                _blocks.Last().Box.BoundingBox.Max.X + Block.Spacing + halfWidth;
+           return previousBlock == null? 0 :
+                previousBlock.Box.BoundingBox.Max.X + Block.Spacing + halfWidth;
         }
 
         public void DeleteLastBlock()

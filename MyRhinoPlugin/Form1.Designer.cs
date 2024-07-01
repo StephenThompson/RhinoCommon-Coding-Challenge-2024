@@ -34,7 +34,6 @@ namespace MyRhinoPlugin
             buttonAddBlock = new System.Windows.Forms.Button();
             buttonDeleteLast = new System.Windows.Forms.Button();
             ButtonDeleteAll = new System.Windows.Forms.Button();
-            button4 = new System.Windows.Forms.Button();
             label1 = new System.Windows.Forms.Label();
             textBoxWidth = new System.Windows.Forms.TextBox();
             blockSettingsBindingSource = new System.Windows.Forms.BindingSource(components);
@@ -47,7 +46,9 @@ namespace MyRhinoPlugin
             groupBox1 = new System.Windows.Forms.GroupBox();
             groupBox2 = new System.Windows.Forms.GroupBox();
             groupBox3 = new System.Windows.Forms.GroupBox();
+            label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)blockSettingsBindingSource).BeginInit();
+            groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
             SuspendLayout();
@@ -65,7 +66,7 @@ namespace MyRhinoPlugin
             // 
             // buttonDeleteLast
             // 
-            buttonDeleteLast.Location = new System.Drawing.Point(7, 89);
+            buttonDeleteLast.Location = new System.Drawing.Point(7, 60);
             buttonDeleteLast.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             buttonDeleteLast.Name = "buttonDeleteLast";
             buttonDeleteLast.Size = new System.Drawing.Size(88, 27);
@@ -76,7 +77,7 @@ namespace MyRhinoPlugin
             // 
             // ButtonDeleteAll
             // 
-            ButtonDeleteAll.Location = new System.Drawing.Point(7, 123);
+            ButtonDeleteAll.Location = new System.Drawing.Point(7, 96);
             ButtonDeleteAll.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ButtonDeleteAll.Name = "ButtonDeleteAll";
             ButtonDeleteAll.Size = new System.Drawing.Size(88, 27);
@@ -84,16 +85,6 @@ namespace MyRhinoPlugin
             ButtonDeleteAll.Text = "Delete All";
             ButtonDeleteAll.UseVisualStyleBackColor = true;
             ButtonDeleteAll.Click += ButtonDeleteAll_Click;
-            // 
-            // button4
-            // 
-            button4.Location = new System.Drawing.Point(7, 56);
-            button4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            button4.Name = "button4";
-            button4.Size = new System.Drawing.Size(88, 27);
-            button4.TabIndex = 3;
-            button4.Text = "Update";
-            button4.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -108,21 +99,17 @@ namespace MyRhinoPlugin
             // textBoxWidth
             // 
             textBoxWidth.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBoxWidth.DataBindings.Add(new System.Windows.Forms.Binding("Text", blockSettingsBindingSource, "Width"));
+            textBoxWidth.DataBindings.Add(new System.Windows.Forms.Binding("Text", blockSettingsBindingSource, "Width", true));
             textBoxWidth.Location = new System.Drawing.Point(63, 23);
             textBoxWidth.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             textBoxWidth.Name = "textBoxWidth";
             textBoxWidth.Size = new System.Drawing.Size(116, 23);
             textBoxWidth.TabIndex = 5;
             // 
-            // blockSettingsBindingSource
-            // 
-            blockSettingsBindingSource.DataSource = typeof(BlockSettings);
-            // 
             // textBoxLength
             // 
             textBoxLength.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBoxLength.DataBindings.Add(new System.Windows.Forms.Binding("Text", blockSettingsBindingSource, "Length"));
+            textBoxLength.DataBindings.Add(new System.Windows.Forms.Binding("Text", blockSettingsBindingSource, "Length", true));
             textBoxLength.Location = new System.Drawing.Point(63, 57);
             textBoxLength.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             textBoxLength.Name = "textBoxLength";
@@ -142,7 +129,7 @@ namespace MyRhinoPlugin
             // textBoxHeight
             // 
             textBoxHeight.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBoxHeight.DataBindings.Add(new System.Windows.Forms.Binding("Text", blockSettingsBindingSource, "Height"));
+            textBoxHeight.DataBindings.Add(new System.Windows.Forms.Binding("Text", blockSettingsBindingSource, "Height", true));
             textBoxHeight.Location = new System.Drawing.Point(63, 93);
             textBoxHeight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             textBoxHeight.Name = "textBoxHeight";
@@ -162,7 +149,7 @@ namespace MyRhinoPlugin
             // textBoxSpacing
             // 
             textBoxSpacing.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBoxSpacing.DataBindings.Add(new System.Windows.Forms.Binding("Text", blockSettingsBindingSource, "Spacing"));
+            textBoxSpacing.DataBindings.Add(new System.Windows.Forms.Binding("Text", blockSettingsBindingSource, "Spacing", true));
             textBoxSpacing.Location = new System.Drawing.Point(63, 126);
             textBoxSpacing.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             textBoxSpacing.Name = "textBoxSpacing";
@@ -182,6 +169,7 @@ namespace MyRhinoPlugin
             // groupBox1
             // 
             groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            groupBox1.Controls.Add(label5);
             groupBox1.Location = new System.Drawing.Point(312, 9);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new System.Drawing.Size(185, 161);
@@ -194,7 +182,6 @@ namespace MyRhinoPlugin
             groupBox2.Controls.Add(buttonAddBlock);
             groupBox2.Controls.Add(buttonDeleteLast);
             groupBox2.Controls.Add(ButtonDeleteAll);
-            groupBox2.Controls.Add(button4);
             groupBox2.Location = new System.Drawing.Point(9, 9);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new System.Drawing.Size(102, 161);
@@ -220,6 +207,15 @@ namespace MyRhinoPlugin
             groupBox3.TabStop = false;
             groupBox3.Text = "Values";
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(6, 19);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(38, 15);
+            label5.TabIndex = 0;
+            label5.Text = "label5";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -232,6 +228,8 @@ namespace MyRhinoPlugin
             Name = "Form1";
             Text = "XFrame RhinoCommon-Coding-Challenge-2024";
             ((System.ComponentModel.ISupportInitialize)blockSettingsBindingSource).EndInit();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
@@ -243,7 +241,6 @@ namespace MyRhinoPlugin
         private System.Windows.Forms.Button buttonAddBlock;
         private System.Windows.Forms.Button buttonDeleteLast;
         private System.Windows.Forms.Button ButtonDeleteAll;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxWidth;
         private System.Windows.Forms.TextBox textBoxLength;
@@ -256,5 +253,6 @@ namespace MyRhinoPlugin
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.BindingSource blockSettingsBindingSource;
+        private System.Windows.Forms.Label label5;
     }
 }
