@@ -1,3 +1,10 @@
+# Changes Overview
+- Implemented in WinForms.
+- Requested: Add, Delete last, Delete All, Statistics (Number of blocks, total volume and area), commenting. 
+- Extra: Recenter Camera, Override size and spacing of blocks.
+
+I spent the day (~7hrs) working on these changes. Working with the Rhino API was mostly straight forward and would have taken ~1hr or so to add all the features. The rest of the time was mostly spent either getting the Rhino debugger working (required switching from net48 to net7.0) or refamiliarizing myself with WinForms (in particular, getting bindings working). The window/interface can be loaded by running the MyRhinoPlugin command in Rhino. 
+
 # XFrame RhinoCommon-Coding-Challenge-2024
 
 Welcome to XFrame's RhinoCommon Coding Challenge! The aim of the challenge, beyond the standard stuff like how you apporach problems and write code, is to give you an opportuntiy to work with Rhino, the RhinoCommon API, and a taste of the work you could be expected to do. The challenge isn't supposed to be difficult or time consuming, and we've setup the repo so you can skip most of the boiler plate.
