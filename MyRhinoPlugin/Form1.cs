@@ -29,5 +29,10 @@ namespace MyRhinoPlugin
         {
             FormPresenter.DeleteLastBlock();
         }
+
+        private void ButtonDeleteAll_Click(object sender, EventArgs e)
+        {
+            FormPresenter.DeleteAllBlocks();
+        }
     }
 }

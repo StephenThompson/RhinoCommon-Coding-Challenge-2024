@@ -58,12 +58,32 @@ namespace MyRhinoPlugin
             if (_blocks.Count == 0) return;
 
             var lastAddedObject = _blocks.Last();
-            var rhinoObj = _doc.Objects.Find(lastAddedObject);
-            if (rhinoObj != null && _doc.Objects.Delete(rhinoObj))
+            if (TryDeleteRhinoObject(lastAddedObject))
             {
-                _blocks.RemoveAt(_blocks.Count-1);
                 _doc.Views.Redraw();
             }
+        }
+
+        public void DeleteAllBlocks()
+        {
+            while (_blocks.Count > 0)
+            {
+                var lastAddedObject = _blocks.Last();
+                _blocks.RemoveAt(_blocks.Count - 1);
+                TryDeleteRhinoObject(lastAddedObject);
+            }
+            _doc.Views.Redraw();
+        }
+
+        private bool TryDeleteRhinoObject(Guid lastAddedObject)
+        {
+            var rhinoObj = _doc.Objects.Find(lastAddedObject);
+            if (rhinoObj != null)
+            {
+                _doc.Objects.Delete(rhinoObj);
+                return true;
+            }
+            return false;
         }
     }
 }

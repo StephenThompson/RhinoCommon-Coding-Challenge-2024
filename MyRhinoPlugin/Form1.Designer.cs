@@ -31,7 +31,7 @@
             components = new System.ComponentModel.Container();
             buttonAddBlock = new System.Windows.Forms.Button();
             buttonDeleteLast = new System.Windows.Forms.Button();
-            button3 = new System.Windows.Forms.Button();
+            ButtonDeleteAll = new System.Windows.Forms.Button();
             button4 = new System.Windows.Forms.Button();
             label1 = new System.Windows.Forms.Label();
             textBox1 = new System.Windows.Forms.TextBox();
@@ -74,15 +74,16 @@
             buttonDeleteLast.UseVisualStyleBackColor = true;
             buttonDeleteLast.Click += buttonDeleteLast_Click;
             // 
-            // button3
+            // ButtonDeleteAll
             // 
-            button3.Location = new System.Drawing.Point(4, 104);
-            button3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            button3.Name = "button3";
-            button3.Size = new System.Drawing.Size(88, 27);
-            button3.TabIndex = 2;
-            button3.Text = "Delete All";
-            button3.UseVisualStyleBackColor = true;
+            ButtonDeleteAll.Location = new System.Drawing.Point(4, 104);
+            ButtonDeleteAll.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            ButtonDeleteAll.Name = "ButtonDeleteAll";
+            ButtonDeleteAll.Size = new System.Drawing.Size(88, 27);
+            ButtonDeleteAll.TabIndex = 2;
+            ButtonDeleteAll.Text = "Delete All";
+            ButtonDeleteAll.UseVisualStyleBackColor = true;
+            ButtonDeleteAll.Click += ButtonDeleteAll_Click;
             // 
             // button4
             // 
@@ -187,7 +188,7 @@
             panel2.Controls.Add(buttonAddBlock);
             panel2.Controls.Add(buttonDeleteLast);
             panel2.Controls.Add(button4);
-            panel2.Controls.Add(button3);
+            panel2.Controls.Add(ButtonDeleteAll);
             panel2.Location = new System.Drawing.Point(14, 9);
             panel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panel2.Name = "panel2";
@@ -237,7 +238,7 @@
 
         private System.Windows.Forms.Button buttonAddBlock;
         private System.Windows.Forms.Button buttonDeleteLast;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button ButtonDeleteAll;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
