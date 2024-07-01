@@ -54,49 +54,24 @@ namespace MyRhinoPlugin
             UpdateStats();   
         }
 
-        private double CalculateNextXAxisOffset(double halfWidth, SceneBlock previousBlock)
-        {
-           return previousBlock == null? 0 :
-                previousBlock.Box.BoundingBox.Max.X + Block.Spacing + halfWidth;
-        }
 
         public void DeleteLastBlock()
         {
             if (_blocks.Count == 0) return;
 
-            var lastAddedObject = _blocks.Last();
-            if (TryDeleteRhinoObject(lastAddedObject))
-            {
-                _doc.Views.Redraw();
-                UpdateStats();
-            }
+            TryDeleteLastBlock();
+            _doc.Views.Redraw();
+            UpdateStats();
         }
 
         public void DeleteAllBlocks()
         {
             while (_blocks.Count > 0)
             {
-                var lastAddedObject = _blocks.Last();
-                _blocks.RemoveAt(_blocks.Count - 1);
-                TryDeleteRhinoObject(lastAddedObject);
+                TryDeleteLastBlock();
             }
             _doc.Views.Redraw();
             UpdateStats();
-        }
-
-        private bool TryDeleteRhinoObject(SceneBlock lastAddedObject)
-        {
-            try
-            {
-                var rhinoObj = _doc.Objects.Find(lastAddedObject.Guid);
-                if (rhinoObj != null)
-                {
-                    _doc.Objects.Delete(rhinoObj);
-                    return true;
-                }
-                return false;
-            }
-            finally { UpdateStats(); }
         }
 
         public void UpdateStats()
@@ -117,12 +92,35 @@ namespace MyRhinoPlugin
                 $"Total Area (m): {totalArea * 0.001:0.00}\n" +
                 $"Total Volume (m): {totalVolume * 0.001:0.00}\n";
         }
+
         public void RecenterCamera()
         {
             foreach (var view in _doc.Views)
             {
                 view.ActiveViewport.ZoomExtents();
             }
+        }
+
+        /////   Private Helpers 
+
+        private double CalculateNextXAxisOffset(double halfWidth, SceneBlock previousBlock)
+        {
+            return previousBlock == null ? 0 :
+                 previousBlock.Box.BoundingBox.Max.X + Block.Spacing + halfWidth;
+        }
+
+        private bool TryDeleteLastBlock()
+        {
+            var lastAddedObject = _blocks.Last();
+            _blocks.RemoveAt(_blocks.Count - 1);
+
+            var rhinoObj = _doc.Objects.Find(lastAddedObject.Guid);
+            if (rhinoObj != null)
+            {
+                _doc.Objects.Delete(rhinoObj);
+                return true;
+            }
+            return false;
         }
     }
 }
