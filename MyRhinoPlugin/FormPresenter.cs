@@ -7,18 +7,31 @@ using System.Linq;
 
 namespace MyRhinoPlugin
 {
+    /// <summary>
+    /// Represents the presenter class for the form in the Rhino plugin.
+    /// </summary>
     public class FormPresenter : ObservableObject
     {
+        /// <summary>
+        /// Gets or sets the block settings.
+        /// </summary>
         public BlockSettings Block { get; set; } = new BlockSettings();
 
-        private string _stats = string.Empty;
+        /// <summary>
+        /// Gets the statistics string.
+        /// </summary>
         public string Stats { get => _stats; private set => SetProperty(ref _stats, value); }
+        private string _stats = string.Empty;
 
-        private List<SceneBlock> _blocks = new List<SceneBlock>();
-        private int _blockIterator = 0;
+        private List<RhinoDocBlock> _blocks = new List<RhinoDocBlock>();
         private RhinoDoc _doc;
         private RunMode _mode;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FormPresenter"/> class.
+        /// </summary>
+        /// <param name="doc">The Rhino document.</param>
+        /// <param name="mode">The run mode.</param>
         public FormPresenter(RhinoDoc doc, RunMode mode)
         {
             _doc = doc;
@@ -26,6 +39,9 @@ namespace MyRhinoPlugin
             UpdateStats();
         }
 
+        /// <summary>
+        /// Adds a new block to the scene.
+        /// </summary>
         public void AddBlock()
         {
             double halfWidth = Block.HalfWidth;
@@ -43,18 +59,20 @@ namespace MyRhinoPlugin
                 new Interval(-halfHeight, halfHeight)
             );
 
-            var newBox = new SceneBlock()
+            var newBox = new RhinoDocBlock()
             {
                 Box = box,
-                Guid = _doc.Objects.AddBox(box)
+                DocGuid = _doc.Objects.AddBox(box)
             };
             _blocks.Add(newBox);
 
             _doc.Views.Redraw();
             UpdateStats();   
         }
-
-
+       
+        /// <summary>
+        /// Deletes the last added block from the scene.
+        /// </summary>
         public void DeleteLastBlock()
         {
             if (_blocks.Count == 0) return;
@@ -64,6 +82,9 @@ namespace MyRhinoPlugin
             UpdateStats();
         }
 
+        /// <summary>
+        /// Deletes all blocks from the scene.
+        /// </summary>
         public void DeleteAllBlocks()
         {
             while (_blocks.Count > 0)
@@ -74,6 +95,9 @@ namespace MyRhinoPlugin
             UpdateStats();
         }
 
+        /// <summary>
+        /// Updates the statistics string.
+        /// </summary>
         public void UpdateStats()
         {
             var totalArea = 0d;
@@ -93,6 +117,9 @@ namespace MyRhinoPlugin
                 $"Total Volume (m): {totalVolume * 0.001:0.00}\n";
         }
 
+        /// <summary>
+        /// Recenters the camera in all views.
+        /// </summary>
         public void RecenterCamera()
         {
             foreach (var view in _doc.Views)
@@ -103,7 +130,7 @@ namespace MyRhinoPlugin
 
         /////   Private Helpers 
 
-        private double CalculateNextXAxisOffset(double halfWidth, SceneBlock previousBlock)
+        private double CalculateNextXAxisOffset(double halfWidth, RhinoDocBlock previousBlock)
         {
             return previousBlock == null ? 0 :
                  previousBlock.Box.BoundingBox.Max.X + Block.Spacing + halfWidth;
@@ -114,7 +141,7 @@ namespace MyRhinoPlugin
             var lastAddedObject = _blocks.Last();
             _blocks.RemoveAt(_blocks.Count - 1);
 
-            var rhinoObj = _doc.Objects.Find(lastAddedObject.Guid);
+            var rhinoObj = _doc.Objects.Find(lastAddedObject.DocGuid);
             if (rhinoObj != null)
             {
                 _doc.Objects.Delete(rhinoObj);
