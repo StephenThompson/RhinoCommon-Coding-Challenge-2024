@@ -1,8 +1,7 @@
-﻿using Rhino;
+﻿using MyRhinoPlugin.Data;
+using Rhino;
 using Rhino.Commands;
-using Rhino.DocObjects;
 using Rhino.Geometry;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,7 +11,7 @@ namespace MyRhinoPlugin
     {
         public BlockSettings Block { get; set; } = new BlockSettings();
 
-        private List<Guid> _blocks = new List<Guid>();
+        private List<SceneBlock> _blocks = new List<SceneBlock>();
         private int _blockIterator = 0;
         private RhinoDoc _doc;
         private RunMode _mode;
@@ -25,31 +24,35 @@ namespace MyRhinoPlugin
 
         public void AddBlock()
         {
-            double X = (Block.Width + Block.Spacing) * _blocks.Count;
-            double Y = 0;
-            double Z = 0;
-
             double halfWidth = Block.HalfWidth;
             double halfLength = Block.HalfLength;
             double halfHeight = Block.HalfHeight;
+
+            double X = CalculateNextXAxisOffset(halfWidth);
+            double Y = 0;
+            double Z = 0;
+
             var box = new Box(
-                new Plane(new Point3d(X,Y,Z), new Vector3d(0, 0, 1)),
+                new Plane(new Point3d(X, Y, Z), Vector3d.ZAxis),
                 new Interval(-halfWidth, halfWidth),
                 new Interval(-halfLength, halfLength),
                 new Interval(-halfHeight, halfHeight)
             );
 
-            var attributes = new ObjectAttributes()
+            var newBox = new SceneBlock()
             {
-                Name = $"Box_{_blockIterator}",
-                LayerIndex = 0,               
+                Box = box,
+                Guid = _doc.Objects.AddBox(box)
             };
-            ++_blockIterator;
-                        
-            var box_guid = _doc.Objects.AddBox(box, attributes);
-            _blocks.Add(box_guid);
+            _blocks.Add(newBox);
 
             _doc.Views.Redraw();
+        }
+
+        private double CalculateNextXAxisOffset(double halfWidth)
+        {
+           return _blocks.Count == 0? 0 :
+                _blocks.Last().Box.BoundingBox.Max.X + Block.Spacing + halfWidth;
         }
 
         public void DeleteLastBlock()
@@ -74,9 +77,9 @@ namespace MyRhinoPlugin
             _doc.Views.Redraw();
         }
 
-        private bool TryDeleteRhinoObject(Guid lastAddedObject)
+        private bool TryDeleteRhinoObject(SceneBlock lastAddedObject)
         {
-            var rhinoObj = _doc.Objects.Find(lastAddedObject);
+            var rhinoObj = _doc.Objects.Find(lastAddedObject.Guid);
             if (rhinoObj != null)
             {
                 _doc.Objects.Delete(rhinoObj);

@@ -1,4 +1,6 @@
-﻿namespace MyRhinoPlugin
+﻿using MyRhinoPlugin.Data;
+
+namespace MyRhinoPlugin
 {
     partial class Form1
     {

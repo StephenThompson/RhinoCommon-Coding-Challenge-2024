@@ -1,16 +1,17 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace MyRhinoPlugin
+namespace MyRhinoPlugin.Data
 {
     public class BlockSettings : INotifyPropertyChanged
     {
         private double _width = 1200;
         private double _length = 92;
-        private double _height= 2400;
+        private double _height = 2400;
         private double _spacing = 2000;
 
-        public double Width {
+        public double Width
+        {
             get
             {
                 return _width;
