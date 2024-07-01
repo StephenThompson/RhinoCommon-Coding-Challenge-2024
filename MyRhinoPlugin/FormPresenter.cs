@@ -4,6 +4,7 @@ using Rhino.DocObjects;
 using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MyRhinoPlugin
 {
@@ -50,6 +51,19 @@ namespace MyRhinoPlugin
             _blocks.Add(box_guid);
 
             _doc.Views.Redraw();
+        }
+
+        public void DeleteLastBlock()
+        {
+            if (_blocks.Count == 0) return;
+
+            var lastAddedObject = _blocks.Last();
+            var rhinoObj = _doc.Objects.Find(lastAddedObject);
+            if (rhinoObj != null && _doc.Objects.Delete(rhinoObj))
+            {
+                _blocks.RemoveAt(_blocks.Count-1);
+                _doc.Views.Redraw();
+            }
         }
     }
 }

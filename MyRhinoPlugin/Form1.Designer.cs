@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            ButtonAddBlock = new System.Windows.Forms.Button();
-            button2 = new System.Windows.Forms.Button();
+            buttonAddBlock = new System.Windows.Forms.Button();
+            buttonDeleteLast = new System.Windows.Forms.Button();
             button3 = new System.Windows.Forms.Button();
             button4 = new System.Windows.Forms.Button();
             label1 = new System.Windows.Forms.Label();
@@ -52,26 +52,27 @@
             ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
             SuspendLayout();
             // 
-            // ButtonAddBlock
+            // buttonAddBlock
             // 
-            ButtonAddBlock.Location = new System.Drawing.Point(4, 3);
-            ButtonAddBlock.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            ButtonAddBlock.Name = "ButtonAddBlock";
-            ButtonAddBlock.Size = new System.Drawing.Size(88, 27);
-            ButtonAddBlock.TabIndex = 0;
-            ButtonAddBlock.Text = "Add";
-            ButtonAddBlock.UseVisualStyleBackColor = true;
-            ButtonAddBlock.Click += ButtonAddBlock_Click;
+            buttonAddBlock.Location = new System.Drawing.Point(4, 3);
+            buttonAddBlock.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            buttonAddBlock.Name = "buttonAddBlock";
+            buttonAddBlock.Size = new System.Drawing.Size(88, 27);
+            buttonAddBlock.TabIndex = 0;
+            buttonAddBlock.Text = "Add";
+            buttonAddBlock.UseVisualStyleBackColor = true;
+            buttonAddBlock.Click += ButtonAddBlock_Click;
             // 
-            // button2
+            // buttonDeleteLast
             // 
-            button2.Location = new System.Drawing.Point(4, 70);
-            button2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            button2.Name = "button2";
-            button2.Size = new System.Drawing.Size(88, 27);
-            button2.TabIndex = 1;
-            button2.Text = "Delete Last";
-            button2.UseVisualStyleBackColor = true;
+            buttonDeleteLast.Location = new System.Drawing.Point(4, 70);
+            buttonDeleteLast.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            buttonDeleteLast.Name = "buttonDeleteLast";
+            buttonDeleteLast.Size = new System.Drawing.Size(88, 27);
+            buttonDeleteLast.TabIndex = 1;
+            buttonDeleteLast.Text = "Delete Last";
+            buttonDeleteLast.UseVisualStyleBackColor = true;
+            buttonDeleteLast.Click += buttonDeleteLast_Click;
             // 
             // button3
             // 
@@ -183,8 +184,8 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(ButtonAddBlock);
-            panel2.Controls.Add(button2);
+            panel2.Controls.Add(buttonAddBlock);
+            panel2.Controls.Add(buttonDeleteLast);
             panel2.Controls.Add(button4);
             panel2.Controls.Add(button3);
             panel2.Location = new System.Drawing.Point(14, 9);
@@ -234,8 +235,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button ButtonAddBlock;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonAddBlock;
+        private System.Windows.Forms.Button buttonDeleteLast;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label1;
