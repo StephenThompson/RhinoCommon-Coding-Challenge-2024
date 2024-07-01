@@ -29,5 +29,10 @@ namespace MyRhinoPlugin
         {
             _formPresenter.DeleteAllBlocks();
         }
+
+        private void buttonRecenterCamera_Click(object sender, EventArgs e)
+        {
+            _formPresenter.RecenterCamera();
+        }
     }
 }

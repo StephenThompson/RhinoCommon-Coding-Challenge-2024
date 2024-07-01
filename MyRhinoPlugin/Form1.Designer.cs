@@ -45,14 +45,15 @@ namespace MyRhinoPlugin
             label4 = new System.Windows.Forms.Label();
             groupBox1 = new System.Windows.Forms.GroupBox();
             labelStats = new System.Windows.Forms.Label();
-            groupBox2 = new System.Windows.Forms.GroupBox();
-            groupBox3 = new System.Windows.Forms.GroupBox();
             bindingPresenterSource = new System.Windows.Forms.BindingSource(components);
+            groupBox2 = new System.Windows.Forms.GroupBox();
+            buttonRecenterCamera = new System.Windows.Forms.Button();
+            groupBox3 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)blockSettingsBindingSource).BeginInit();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)bindingPresenterSource).BeginInit();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)bindingPresenterSource).BeginInit();
             SuspendLayout();
             // 
             // buttonAddBlock
@@ -94,28 +95,28 @@ namespace MyRhinoPlugin
             label1.Location = new System.Drawing.Point(18, 26);
             label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(42, 15);
+            label1.Size = new System.Drawing.Size(75, 15);
             label1.TabIndex = 4;
-            label1.Text = "Width:";
+            label1.Text = "Width (mm):";
             // 
             // textBoxWidth
             // 
             textBoxWidth.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             textBoxWidth.DataBindings.Add(new System.Windows.Forms.Binding("Text", blockSettingsBindingSource, "Width", true));
-            textBoxWidth.Location = new System.Drawing.Point(63, 23);
+            textBoxWidth.Location = new System.Drawing.Point(92, 23);
             textBoxWidth.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             textBoxWidth.Name = "textBoxWidth";
-            textBoxWidth.Size = new System.Drawing.Size(116, 23);
+            textBoxWidth.Size = new System.Drawing.Size(114, 23);
             textBoxWidth.TabIndex = 5;
             // 
             // textBoxLength
             // 
             textBoxLength.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             textBoxLength.DataBindings.Add(new System.Windows.Forms.Binding("Text", blockSettingsBindingSource, "Length", true));
-            textBoxLength.Location = new System.Drawing.Point(63, 57);
+            textBoxLength.Location = new System.Drawing.Point(92, 57);
             textBoxLength.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             textBoxLength.Name = "textBoxLength";
-            textBoxLength.Size = new System.Drawing.Size(116, 23);
+            textBoxLength.Size = new System.Drawing.Size(114, 23);
             textBoxLength.TabIndex = 7;
             // 
             // label2
@@ -124,18 +125,18 @@ namespace MyRhinoPlugin
             label2.Location = new System.Drawing.Point(13, 60);
             label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(47, 15);
+            label2.Size = new System.Drawing.Size(80, 15);
             label2.TabIndex = 6;
-            label2.Text = "Length:";
+            label2.Text = "Length (mm):";
             // 
             // textBoxHeight
             // 
             textBoxHeight.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             textBoxHeight.DataBindings.Add(new System.Windows.Forms.Binding("Text", blockSettingsBindingSource, "Height", true));
-            textBoxHeight.Location = new System.Drawing.Point(63, 93);
+            textBoxHeight.Location = new System.Drawing.Point(92, 93);
             textBoxHeight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             textBoxHeight.Name = "textBoxHeight";
-            textBoxHeight.Size = new System.Drawing.Size(116, 23);
+            textBoxHeight.Size = new System.Drawing.Size(114, 23);
             textBoxHeight.TabIndex = 9;
             // 
             // label3
@@ -144,18 +145,18 @@ namespace MyRhinoPlugin
             label3.Location = new System.Drawing.Point(14, 96);
             label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(46, 15);
+            label3.Size = new System.Drawing.Size(79, 15);
             label3.TabIndex = 8;
-            label3.Text = "Height:";
+            label3.Text = "Height (mm):";
             // 
             // textBoxSpacing
             // 
             textBoxSpacing.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             textBoxSpacing.DataBindings.Add(new System.Windows.Forms.Binding("Text", blockSettingsBindingSource, "Spacing", true));
-            textBoxSpacing.Location = new System.Drawing.Point(63, 126);
+            textBoxSpacing.Location = new System.Drawing.Point(92, 126);
             textBoxSpacing.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             textBoxSpacing.Name = "textBoxSpacing";
-            textBoxSpacing.Size = new System.Drawing.Size(116, 23);
+            textBoxSpacing.Size = new System.Drawing.Size(114, 23);
             textBoxSpacing.TabIndex = 11;
             // 
             // label4
@@ -164,17 +165,17 @@ namespace MyRhinoPlugin
             label4.Location = new System.Drawing.Point(8, 129);
             label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(52, 15);
+            label4.Size = new System.Drawing.Size(85, 15);
             label4.TabIndex = 10;
-            label4.Text = "Spacing:";
+            label4.Text = "Spacing (mm):";
             // 
             // groupBox1
             // 
             groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             groupBox1.Controls.Add(labelStats);
-            groupBox1.Location = new System.Drawing.Point(312, 9);
+            groupBox1.Location = new System.Drawing.Point(339, 9);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new System.Drawing.Size(185, 161);
+            groupBox1.Size = new System.Drawing.Size(205, 183);
             groupBox1.TabIndex = 16;
             groupBox1.TabStop = false;
             groupBox1.Text = "Stats";
@@ -191,15 +192,27 @@ namespace MyRhinoPlugin
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(buttonRecenterCamera);
             groupBox2.Controls.Add(buttonAddBlock);
             groupBox2.Controls.Add(buttonDeleteLast);
             groupBox2.Controls.Add(ButtonDeleteAll);
             groupBox2.Location = new System.Drawing.Point(9, 9);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new System.Drawing.Size(102, 161);
+            groupBox2.Size = new System.Drawing.Size(102, 183);
             groupBox2.TabIndex = 17;
             groupBox2.TabStop = false;
             groupBox2.Text = "Commands";
+            // 
+            // buttonRecenterCamera
+            // 
+            buttonRecenterCamera.Location = new System.Drawing.Point(7, 132);
+            buttonRecenterCamera.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            buttonRecenterCamera.Name = "buttonRecenterCamera";
+            buttonRecenterCamera.Size = new System.Drawing.Size(88, 39);
+            buttonRecenterCamera.TabIndex = 3;
+            buttonRecenterCamera.Text = "Recenter Camera";
+            buttonRecenterCamera.UseVisualStyleBackColor = true;
+            buttonRecenterCamera.Click += buttonRecenterCamera_Click;
             // 
             // groupBox3
             // 
@@ -214,7 +227,7 @@ namespace MyRhinoPlugin
             groupBox3.Controls.Add(textBoxLength);
             groupBox3.Location = new System.Drawing.Point(117, 12);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new System.Drawing.Size(189, 158);
+            groupBox3.Size = new System.Drawing.Size(216, 180);
             groupBox3.TabIndex = 17;
             groupBox3.TabStop = false;
             groupBox3.Text = "Values";
@@ -223,7 +236,7 @@ namespace MyRhinoPlugin
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(505, 177);
+            ClientSize = new System.Drawing.Size(552, 197);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
@@ -233,10 +246,10 @@ namespace MyRhinoPlugin
             ((System.ComponentModel.ISupportInitialize)blockSettingsBindingSource).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)bindingPresenterSource).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)bindingPresenterSource).EndInit();
             ResumeLayout(false);
         }
 
@@ -259,5 +272,6 @@ namespace MyRhinoPlugin
         private System.Windows.Forms.BindingSource blockSettingsBindingSource;
         private System.Windows.Forms.Label labelStats;
         private System.Windows.Forms.BindingSource bindingPresenterSource;
+        private System.Windows.Forms.Button buttonRecenterCamera;
     }
 }

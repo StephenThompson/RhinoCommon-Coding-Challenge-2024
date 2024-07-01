@@ -51,7 +51,7 @@ namespace MyRhinoPlugin
             _blocks.Add(newBox);
 
             _doc.Views.Redraw();
-            UpdateStats();
+            UpdateStats();   
         }
 
         private double CalculateNextXAxisOffset(double halfWidth, SceneBlock previousBlock)
@@ -112,8 +112,17 @@ namespace MyRhinoPlugin
 
             Stats =
                 $"Block Count: {_blocks.Count}\n" +
-                $"Total Area: {totalArea}\n" +
-                $"Total Volume: {totalVolume}";
+                $"Total Area (mm): {totalArea}\n" +
+                $"Total Volume (mm): {totalVolume}\n" +
+                $"Total Area (m): {totalArea * 0.001:0.00}\n" +
+                $"Total Volume (m): {totalVolume * 0.001:0.00}\n";
+        }
+        public void RecenterCamera()
+        {
+            foreach (var view in _doc.Views)
+            {
+                view.ActiveViewport.ZoomExtents();
+            }
         }
     }
 }
