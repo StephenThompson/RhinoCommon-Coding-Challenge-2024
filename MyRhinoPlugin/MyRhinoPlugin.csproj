@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net7.0;net48</TargetFrameworks>
 	<Version>1.0</Version>
-	<Title>XFrame RhinoPlugin</Title>
+	<Title>My RhinoPlugin</Title>
 	<Description>Rhino example plugin for XFrame.</Description>
 	<TargetExt>.rhp</TargetExt>
 	<UseWindowsForms>true</UseWindowsForms>
