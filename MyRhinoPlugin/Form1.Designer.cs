@@ -44,13 +44,15 @@ namespace MyRhinoPlugin
             textBoxSpacing = new System.Windows.Forms.TextBox();
             label4 = new System.Windows.Forms.Label();
             groupBox1 = new System.Windows.Forms.GroupBox();
+            labelStats = new System.Windows.Forms.Label();
             groupBox2 = new System.Windows.Forms.GroupBox();
             groupBox3 = new System.Windows.Forms.GroupBox();
-            label5 = new System.Windows.Forms.Label();
+            bindingPresenterSource = new System.Windows.Forms.BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)blockSettingsBindingSource).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)bindingPresenterSource).BeginInit();
             SuspendLayout();
             // 
             // buttonAddBlock
@@ -169,13 +171,23 @@ namespace MyRhinoPlugin
             // groupBox1
             // 
             groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            groupBox1.Controls.Add(label5);
+            groupBox1.Controls.Add(labelStats);
             groupBox1.Location = new System.Drawing.Point(312, 9);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new System.Drawing.Size(185, 161);
             groupBox1.TabIndex = 16;
             groupBox1.TabStop = false;
             groupBox1.Text = "Stats";
+            // 
+            // labelStats
+            // 
+            labelStats.AutoSize = true;
+            labelStats.DataBindings.Add(new System.Windows.Forms.Binding("Text", bindingPresenterSource, "Stats", true));
+            labelStats.Location = new System.Drawing.Point(6, 19);
+            labelStats.Name = "labelStats";
+            labelStats.Size = new System.Drawing.Size(38, 15);
+            labelStats.TabIndex = 0;
+            labelStats.Text = "label5";
             // 
             // groupBox2
             // 
@@ -207,15 +219,6 @@ namespace MyRhinoPlugin
             groupBox3.TabStop = false;
             groupBox3.Text = "Values";
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(6, 19);
-            label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(38, 15);
-            label5.TabIndex = 0;
-            label5.Text = "label5";
-            // 
             // Form1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -233,6 +236,7 @@ namespace MyRhinoPlugin
             groupBox2.ResumeLayout(false);
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)bindingPresenterSource).EndInit();
             ResumeLayout(false);
         }
 
@@ -253,6 +257,7 @@ namespace MyRhinoPlugin
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.BindingSource blockSettingsBindingSource;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labelStats;
+        private System.Windows.Forms.BindingSource bindingPresenterSource;
     }
 }

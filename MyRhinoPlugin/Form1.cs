@@ -12,6 +12,7 @@ namespace MyRhinoPlugin
             InitializeComponent();
             _formPresenter = formPresenter;
             blockSettingsBindingSource.DataSource = _formPresenter.Block;
+            bindingPresenterSource.DataSource = _formPresenter;
         }
 
         private void ButtonAddBlock_Click(object sender, EventArgs e)

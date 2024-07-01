@@ -23,6 +23,7 @@ namespace MyRhinoPlugin
         {
             _doc = doc;
             _mode = mode;
+            UpdateStats();
         }
 
         public void AddBlock()
@@ -31,7 +32,7 @@ namespace MyRhinoPlugin
             double halfLength = Block.HalfLength;
             double halfHeight = Block.HalfHeight;
 
-            double X = CalculateNextXAxisOffset(halfWidth, _blocks.Last());
+            double X = CalculateNextXAxisOffset(halfWidth, _blocks.LastOrDefault());
             double Y = 0;
             double Z = 0;
 
@@ -50,6 +51,7 @@ namespace MyRhinoPlugin
             _blocks.Add(newBox);
 
             _doc.Views.Redraw();
+            UpdateStats();
         }
 
         private double CalculateNextXAxisOffset(double halfWidth, SceneBlock previousBlock)
@@ -66,6 +68,7 @@ namespace MyRhinoPlugin
             if (TryDeleteRhinoObject(lastAddedObject))
             {
                 _doc.Views.Redraw();
+                UpdateStats();
             }
         }
 
@@ -78,17 +81,39 @@ namespace MyRhinoPlugin
                 TryDeleteRhinoObject(lastAddedObject);
             }
             _doc.Views.Redraw();
+            UpdateStats();
         }
 
         private bool TryDeleteRhinoObject(SceneBlock lastAddedObject)
         {
-            var rhinoObj = _doc.Objects.Find(lastAddedObject.Guid);
-            if (rhinoObj != null)
+            try
             {
-                _doc.Objects.Delete(rhinoObj);
-                return true;
+                var rhinoObj = _doc.Objects.Find(lastAddedObject.Guid);
+                if (rhinoObj != null)
+                {
+                    _doc.Objects.Delete(rhinoObj);
+                    return true;
+                }
+                return false;
             }
-            return false;
+            finally { UpdateStats(); }
+        }
+
+        public void UpdateStats()
+        {
+            var totalArea = 0d;
+            var totalVolume = 0d;
+
+            foreach (var block in _blocks)
+            {
+                totalArea += block.Box.Area;
+                totalVolume += block.Box.Volume;
+            }
+
+            Stats =
+                $"Block Count: {_blocks.Count}\n" +
+                $"Total Area: {totalArea}\n" +
+                $"Total Volume: {totalVolume}";
         }
     }
 }
