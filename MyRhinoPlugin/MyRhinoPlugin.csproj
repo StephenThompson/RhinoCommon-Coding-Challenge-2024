@@ -13,9 +13,18 @@
   <ItemGroup>
     <EmbeddedResource Include="EmbeddedResources\**\*" />
   </ItemGroup>
-  
+
   <ItemGroup>
-    <PackageReference Include="RhinoCommon" Version="8.4.24044.15001" IncludeAssets="compile;build" />
+    <None Remove="Properties\Resources.xaml" />
   </ItemGroup>
   
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="RhinoCommon" Version="8.4.24044.15001" IncludeAssets="compile;build" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Commands\" />
+  </ItemGroup>
+
 </Project>

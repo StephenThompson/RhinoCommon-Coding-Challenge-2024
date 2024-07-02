@@ -25,17 +25,14 @@ namespace MyRhinoPlugin
 
         private List<RhinoDocBlock> _blocks = new List<RhinoDocBlock>();
         private RhinoDoc _doc;
-        private RunMode _mode;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FormPresenter"/> class.
         /// </summary>
         /// <param name="doc">The Rhino document.</param>
-        /// <param name="mode">The run mode.</param>
-        public FormPresenter(RhinoDoc doc, RunMode mode)
+        public FormPresenter(RhinoDoc doc)
         {
             _doc = doc;
-            _mode = mode;
             UpdateStats();
         }
 
@@ -52,19 +49,23 @@ namespace MyRhinoPlugin
             double Y = 0;
             double Z = 0;
 
-            var box = new Box(
-                new Plane(new Point3d(X, Y, Z), Vector3d.ZAxis),
-                new Interval(-halfWidth, halfWidth),
-                new Interval(-halfLength, halfLength),
-                new Interval(-halfHeight, halfHeight)
-            );
 
-            var newBox = new RhinoDocBlock()
-            {
-                Box = box,
-                DocGuid = _doc.Objects.AddBox(box)
-            };
-            _blocks.Add(newBox);
+
+
+
+            //var box = new Box(
+            //    new Plane(new Point3d(X, Y, Z), Vector3d.ZAxis),
+            //    new Interval(-halfWidth, halfWidth),
+            //    new Interval(-halfLength, halfLength),
+            //    new Interval(-halfHeight, halfHeight)
+            //);
+
+            //var newBox = new RhinoDocBlock()
+            //{
+            //    Box = box,
+            //    DocGuid = _doc.Objects.AddBox(box)
+            //};
+            //_blocks.Add(newBox);
 
             _doc.Views.Redraw();
             UpdateStats();   
