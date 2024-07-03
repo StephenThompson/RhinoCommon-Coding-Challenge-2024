@@ -13,7 +13,7 @@ namespace MyRhinoPlugin
             InitializeComponent();
 
             _formPresenter = MyRhinoPlugin.Instance.CreateFormPresenter();
-            blockSettingsBindingSource.DataSource = _formPresenter.Block;
+            blockSettingsBindingSource.DataSource = _formPresenter.BoxSetting;
             bindingPresenterSource.DataSource = _formPresenter;
         }
 

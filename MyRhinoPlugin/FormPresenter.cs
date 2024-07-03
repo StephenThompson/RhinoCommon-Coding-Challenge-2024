@@ -16,15 +16,18 @@ namespace MyRhinoPlugin
         /// <summary>
         /// Gets or sets the block settings.
         /// </summary>
-        public BoxSettings Block { get; set; } = new BoxSettings();
+        public BoxSettings BoxSetting { get; set; } = new BoxSettings();
 
+        /// <summary>
+        /// Gets or sets the name of the block.
+        /// </summary>
         public string BlockName 
         { 
             get => _blockName;
             set 
             {
                 SetProperty(ref _blockName, value);
-                UpdateDocInstance();
+                UpdateInstanceVisualizer();
                 _doc.Views.Redraw();
             }
         }
@@ -36,7 +39,10 @@ namespace MyRhinoPlugin
         public string Stats { get => _stats; private set => SetProperty(ref _stats, value); }
         private string _stats = string.Empty;
 
+        /* The active rhino doc object */
         private RhinoDoc _doc;
+
+        /* The Guid of the rhino doc object used to visualize the instance/block */
         private Guid visualizeInstGuid;
 
         /// <summary>
@@ -52,15 +58,16 @@ namespace MyRhinoPlugin
         /// <summary>
         /// Adds a new box to the block.
         /// </summary>
+        /// <returns><c>true</c> if the box was successfully created, <c>false</c> otherwise.</returns>
         public bool CreateBox()
         {
             if (!CreateOrGetInstanceDefinition(out var blockDefinition))
                 return false;
 
             // Create Box
-            double halfWidth = Block.HalfWidth;
-            double halfLength = Block.HalfLength;
-            double halfHeight = Block.HalfHeight;
+            double halfWidth = BoxSetting.HalfWidth;
+            double halfLength = BoxSetting.HalfLength;
+            double halfHeight = BoxSetting.HalfHeight;
 
             double X = CalculateNextXAxisOffset(halfWidth, blockDefinition);
             double Y = 0;
@@ -121,12 +128,12 @@ namespace MyRhinoPlugin
                     return false;
                 }
                 blockDefinition = _doc.InstanceDefinitions.Find(_blockName);
-                UpdateDocInstance();
+                UpdateInstanceVisualizer();
             }
             return true;
         }
 
-        private void UpdateDocInstance()
+        private void UpdateInstanceVisualizer()
         {
             var docInstObject = _doc.Objects.Find(visualizeInstGuid);
             if (docInstObject != null)
@@ -149,7 +156,7 @@ namespace MyRhinoPlugin
         {
             var lastObj = blockDefinition.GetObjects().LastOrDefault();
             return lastObj == null ? 0 :
-                 lastObj.Geometry.GetBoundingBox(false).Max.X + Block.Spacing + halfWidth;
+                 lastObj.Geometry.GetBoundingBox(false).Max.X + BoxSetting.Spacing + halfWidth;
         }
 
         /// <summary>
@@ -203,11 +210,12 @@ namespace MyRhinoPlugin
             var blockDefinition = _doc.InstanceDefinitions.Find(_blockName);
             if (blockDefinition != null)
             {
-                totalBlockCount = blockDefinition.ObjectCount;
                 var blockObjects = blockDefinition.GetObjects();
+                totalBlockCount = blockObjects.Length;
                 foreach (var block in blockObjects)
                 {
-                    // GetBoundingBox is a bit of a hack.
+                    // GetBoundingBox is a bit of a quick hack.
+                    // Assumes The objects in the block will always be a box.
                     var boundingBox = block.Geometry.GetBoundingBox(false);
                     totalArea += boundingBox.Area;
                     totalVolume += boundingBox.Volume;
