@@ -207,6 +207,7 @@
             buttonDeleteLast.TabIndex = 1;
             buttonDeleteLast.Text = "Delete Last";
             buttonDeleteLast.UseVisualStyleBackColor = true;
+            buttonDeleteLast.Click += buttonDeleteLast_Click;
             // 
             // ButtonDeleteAll
             // 
