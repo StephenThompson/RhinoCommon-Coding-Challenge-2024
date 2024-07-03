@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyRhinoPlugin.Forms;
+using System;
 using System.Windows.Forms;
 
 namespace MyRhinoPlugin
@@ -29,6 +30,20 @@ namespace MyRhinoPlugin
         private void ButtonDeleteAll_Click(object sender, EventArgs e)
         {
             _formPresenter.DeleteAllBoxes();
+        }
+
+        private void buttonSetBlockName_Click(object sender, EventArgs e)
+        {
+            var dialog = new SetStringDialog()
+            {
+                Message = "Please type in the Block Name.",
+                InputText = _formPresenter.BlockName
+            };
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                _formPresenter.BlockName = dialog.InputText;
+            }
         }
     }
 }

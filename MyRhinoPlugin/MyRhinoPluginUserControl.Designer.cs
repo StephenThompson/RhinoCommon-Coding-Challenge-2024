@@ -48,8 +48,8 @@
             groupBox1 = new System.Windows.Forms.GroupBox();
             labelStats = new System.Windows.Forms.Label();
             bindingPresenterSource = new System.Windows.Forms.BindingSource(components);
-            textBoxBlockName = new System.Windows.Forms.TextBox();
             label5 = new System.Windows.Forms.Label();
+            buttonSetBlockName = new System.Windows.Forms.Button();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)blockSettingsBindingSource).BeginInit();
             groupBox2.SuspendLayout();
@@ -242,16 +242,6 @@
             labelStats.TabIndex = 0;
             labelStats.Text = "label5";
             // 
-            // textBoxBlockName
-            // 
-            textBoxBlockName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            textBoxBlockName.DataBindings.Add(new System.Windows.Forms.Binding("Text", bindingPresenterSource, "BlockName", true));
-            textBoxBlockName.Location = new System.Drawing.Point(4, 32);
-            textBoxBlockName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            textBoxBlockName.Name = "textBoxBlockName";
-            textBoxBlockName.Size = new System.Drawing.Size(199, 23);
-            textBoxBlockName.TabIndex = 21;
-            // 
             // label5
             // 
             label5.AutoSize = true;
@@ -261,12 +251,24 @@
             label5.TabIndex = 1;
             label5.Text = "Block Name:";
             // 
+            // buttonSetBlockName
+            // 
+            buttonSetBlockName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            buttonSetBlockName.DataBindings.Add(new System.Windows.Forms.Binding("Text", bindingPresenterSource, "BlockName", true));
+            buttonSetBlockName.Location = new System.Drawing.Point(5, 32);
+            buttonSetBlockName.Name = "buttonSetBlockName";
+            buttonSetBlockName.Size = new System.Drawing.Size(198, 23);
+            buttonSetBlockName.TabIndex = 21;
+            buttonSetBlockName.Text = "button1";
+            buttonSetBlockName.UseVisualStyleBackColor = true;
+            buttonSetBlockName.Click += buttonSetBlockName_Click;
+            // 
             // MyRhinoPluginUserControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(buttonSetBlockName);
             Controls.Add(label5);
-            Controls.Add(textBoxBlockName);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
@@ -304,7 +306,7 @@
         private System.Windows.Forms.Label labelStats;
         private System.Windows.Forms.BindingSource bindingPresenterSource;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TextBox textBoxBlockName;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button buttonSetBlockName;
     }
 }
