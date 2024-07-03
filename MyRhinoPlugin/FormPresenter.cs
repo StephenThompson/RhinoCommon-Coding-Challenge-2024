@@ -178,10 +178,16 @@ namespace MyRhinoPlugin
         /// </summary>
         public void DeleteAllBoxes()
         {
-            while (_blocks.Count > 0)
+            var blockDefinition = _doc.InstanceDefinitions.Find(_blockName);
+            if (blockDefinition == null)
             {
-                TryDeleteLastBlock();
+                RhinoApp.WriteLine("Failed to delete last box, instance does not exist.");
+                return;
             }
+
+            var geometry = new List<GeometryBase>();
+            var attributes = new List<ObjectAttributes>();
+            _doc.InstanceDefinitions.ModifyGeometry(blockDefinition.Index, geometry, attributes);
             _doc.Views.Redraw();
             UpdateStats();
         }

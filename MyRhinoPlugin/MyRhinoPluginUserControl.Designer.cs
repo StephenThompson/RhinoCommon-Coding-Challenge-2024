@@ -219,6 +219,7 @@
             ButtonDeleteAll.TabIndex = 2;
             ButtonDeleteAll.Text = "Delete All";
             ButtonDeleteAll.UseVisualStyleBackColor = true;
+            ButtonDeleteAll.Click += ButtonDeleteAll_Click;
             // 
             // groupBox1
             // 
