@@ -23,8 +23,4 @@
     <PackageReference Include="RhinoCommon" Version="8.4.24044.15001" IncludeAssets="compile;build" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Commands\" />
-  </ItemGroup>
-
 </Project>

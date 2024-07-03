@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents the settings for a block.
     /// </summary>
-    public class BlockSettings : ObservableObject
+    public class BoxSettings : ObservableObject
     {
         private double _width = 1200;
         private double _length = 92;

@@ -1,7 +1,11 @@
-﻿using MyRhinoPlugin.Data;
+﻿using MyRhinoPlugin.Commands;
+using MyRhinoPlugin.Data;
 using Rhino;
 using Rhino.Commands;
 using Rhino.Geometry;
+using Rhino.Input.Custom;
+using Rhino.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,7 +19,7 @@ namespace MyRhinoPlugin
         /// <summary>
         /// Gets or sets the block settings.
         /// </summary>
-        public BlockSettings Block { get; set; } = new BlockSettings();
+        public BoxSettings Block { get; set; } = new BoxSettings();
 
         /// <summary>
         /// Gets the statistics string.
@@ -23,7 +27,7 @@ namespace MyRhinoPlugin
         public string Stats { get => _stats; private set => SetProperty(ref _stats, value); }
         private string _stats = string.Empty;
 
-        private List<RhinoDocBlock> _blocks = new List<RhinoDocBlock>();
+        private List<RhinoDocBox> _blocks = new List<RhinoDocBox>();
         private RhinoDoc _doc;
 
         /// <summary>
@@ -39,7 +43,7 @@ namespace MyRhinoPlugin
         /// <summary>
         /// Adds a new block to the scene.
         /// </summary>
-        public void AddBlock()
+        public bool CreateBlock(string inputText)
         {
             double halfWidth = Block.HalfWidth;
             double halfLength = Block.HalfLength;
@@ -49,9 +53,7 @@ namespace MyRhinoPlugin
             double Y = 0;
             double Z = 0;
 
-
-
-
+            //AddBoxCommand.Instance.run
 
             //var box = new Box(
             //    new Plane(new Point3d(X, Y, Z), Vector3d.ZAxis),
@@ -60,21 +62,32 @@ namespace MyRhinoPlugin
             //    new Interval(-halfHeight, halfHeight)
             //);
 
-            //var newBox = new RhinoDocBlock()
+            //var newBox = new RhinoDocBox()
             //{
             //    Box = box,
             //    DocGuid = _doc.Objects.AddBox(box)
             //};
+
+            //// Gather all of the selected objects
+            //var idef_index = doc.InstanceDefinitions.Add(idef_name, string.Empty, base_point, geometry, attributes);
+            //if (idef_index < 0)
+            //{
+            //    RhinoApp.WriteLine("Unable to create block definition", idef_name);
+            //    return Result.Failure;
+            //}
+
+
             //_blocks.Add(newBox);
 
-            _doc.Views.Redraw();
-            UpdateStats();   
+            //_doc.Views.Redraw();
+            UpdateStats();
+            return true;
         }
        
         /// <summary>
         /// Deletes the last added block from the scene.
         /// </summary>
-        public void DeleteLastBlock()
+        public void DeleteLastBox()
         {
             if (TryDeleteLastBlock())
             {
@@ -86,7 +99,7 @@ namespace MyRhinoPlugin
         /// <summary>
         /// Deletes all blocks from the scene.
         /// </summary>
-        public void DeleteAllBlocks()
+        public void DeleteAllBoxes()
         {
             while (_blocks.Count > 0)
             {
@@ -129,9 +142,19 @@ namespace MyRhinoPlugin
             }
         }
 
+        internal void DeleteSelectedBlock()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void RenameSelectedBlock()
+        {
+            throw new NotImplementedException();
+        }
+
         /////   Private Helpers 
 
-        private double CalculateNextXAxisOffset(double halfWidth, RhinoDocBlock previousBlock)
+        private double CalculateNextXAxisOffset(double halfWidth, RhinoDocBox previousBlock)
         {
             return previousBlock == null ? 0 :
                  previousBlock.Box.BoundingBox.Max.X + Block.Spacing + halfWidth;
@@ -152,6 +175,11 @@ namespace MyRhinoPlugin
                 return true;
             }
             return false;
+        }
+
+        internal void CreateBox()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -6,7 +6,7 @@ namespace MyRhinoPlugin.Data
     /// <summary>
     /// Represents a block in the Rhino document.
     /// </summary>
-    public class RhinoDocBlock
+    public class RhinoDocBox
     {
         /// <summary>
         /// Gets or sets the unique identifier of the block.
