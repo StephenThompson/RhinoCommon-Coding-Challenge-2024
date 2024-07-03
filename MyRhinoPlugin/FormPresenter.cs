@@ -1,10 +1,7 @@
-﻿using MyRhinoPlugin.Commands;
-using MyRhinoPlugin.Data;
+﻿using MyRhinoPlugin.Data;
 using Rhino;
-using Rhino.Commands;
+using Rhino.DocObjects;
 using Rhino.Geometry;
-using Rhino.Input.Custom;
-using Rhino.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +18,18 @@ namespace MyRhinoPlugin
         /// </summary>
         public BoxSettings Block { get; set; } = new BoxSettings();
 
+        public string BlockName 
+        { 
+            get => _blockName;
+            set 
+            {
+                SetProperty(ref _blockName, value);
+                UpdateDocInstance();
+                _doc.Views.Redraw();
+            }
+        }
+        private string _blockName = "MyRhinoPlugin Example";
+
         /// <summary>
         /// Gets the statistics string.
         /// </summary>
@@ -29,6 +38,7 @@ namespace MyRhinoPlugin
 
         private List<RhinoDocBox> _blocks = new List<RhinoDocBox>();
         private RhinoDoc _doc;
+        private Guid visualizeInstGuid;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FormPresenter"/> class.
@@ -41,51 +51,110 @@ namespace MyRhinoPlugin
         }
 
         /// <summary>
-        /// Adds a new block to the scene.
+        /// Adds a new box to the block.
         /// </summary>
-        public bool CreateBlock(string inputText)
+        public bool CreateBox()
         {
+            if (!CreateOrGetInstanceDefinition(out var blockDefinition))
+                return false;
+
+            // Create Box
             double halfWidth = Block.HalfWidth;
             double halfLength = Block.HalfLength;
             double halfHeight = Block.HalfHeight;
 
-            double X = CalculateNextXAxisOffset(halfWidth, _blocks.LastOrDefault());
+            double X = CalculateNextXAxisOffset(halfWidth, blockDefinition);
             double Y = 0;
             double Z = 0;
 
-            //AddBoxCommand.Instance.run
+            var position = new Point3d(X, Y, Z);
+            var plane = Plane.CreateFromNormal(position, Vector3d.ZAxis);
+            var box = new Box(plane,
+                new Interval(-halfWidth, halfWidth),
+                new Interval(-halfLength, halfLength),
+                new Interval(-halfHeight, halfHeight));
 
-            //var box = new Box(
-            //    new Plane(new Point3d(X, Y, Z), Vector3d.ZAxis),
-            //    new Interval(-halfWidth, halfWidth),
-            //    new Interval(-halfLength, halfLength),
-            //    new Interval(-halfHeight, halfHeight)
-            //);
+            // Update Block
+            var geometry = new List<GeometryBase>();
+            var attributes = new List<ObjectAttributes>();
+            CopyArraysFromInstance(blockDefinition, geometry, attributes);
 
-            //var newBox = new RhinoDocBox()
-            //{
-            //    Box = box,
-            //    DocGuid = _doc.Objects.AddBox(box)
-            //};
+            GeometryBase boxGeo = box.ToExtrusion();
+            geometry.Add(boxGeo);
+            attributes.Add(new ObjectAttributes());
 
-            //// Gather all of the selected objects
-            //var idef_index = doc.InstanceDefinitions.Add(idef_name, string.Empty, base_point, geometry, attributes);
-            //if (idef_index < 0)
-            //{
-            //    RhinoApp.WriteLine("Unable to create block definition", idef_name);
-            //    return Result.Failure;
-            //}
-
-
-            //_blocks.Add(newBox);
-
-            //_doc.Views.Redraw();
+            _doc.InstanceDefinitions.ModifyGeometry(blockDefinition.Index, geometry, attributes);
+            _doc.Views.Redraw();
             UpdateStats();
             return true;
         }
-       
+
+        private void CopyArraysFromInstance(
+            InstanceDefinition blockDefinition, 
+            List<GeometryBase> geometry, List<ObjectAttributes> attributes,
+            int i_start = 0, int i_end = -1)
+        {
+            var existingObjects = blockDefinition.GetObjects();
+            if (i_end < 0) i_end = existingObjects.Length;
+
+            for (int i = i_start; i < i_end && i < existingObjects.Length; ++i)
+            {
+                var i_object = existingObjects[i];
+                geometry.Add(i_object.Geometry);
+                attributes.Add(i_object.Attributes);
+            }
+        }
+
+        private bool CreateOrGetInstanceDefinition(out InstanceDefinition blockDefinition)
+        {
+            blockDefinition = _doc.InstanceDefinitions.Find(_blockName);
+            if (blockDefinition == null)
+            {
+                // Gather all of the selected objects
+                var geometry = new List<GeometryBase>();
+                var attributes = new List<ObjectAttributes>();
+
+                // Gather all of the selected objects
+                var idef_index = _doc.InstanceDefinitions.Add(_blockName, string.Empty, new Point3d(0, 0, 0), geometry, attributes);
+                if (idef_index < 0)
+                {
+                    RhinoApp.WriteLine("Unable to create block definition", _blockName);
+                    return false;
+                }
+                blockDefinition = _doc.InstanceDefinitions.Find(_blockName);
+                UpdateDocInstance();
+            }
+            return true;
+        }
+
+        private void UpdateDocInstance()
+        {
+            var docInstObject = _doc.Objects.Find(visualizeInstGuid);
+            if (docInstObject != null)
+            {
+                _doc.Objects.Delete(docInstObject);
+            }
+
+            var blockDefinition = _doc.InstanceDefinitions.Find(_blockName);
+            if (blockDefinition != null)
+            {
+                visualizeInstGuid = _doc.Objects.AddInstanceObject(blockDefinition.Index, Transform.Identity);
+            }
+            else
+            {
+                RhinoApp.WriteLine("Failed to update doc instance.");
+            }
+        }
+
+        private double CalculateNextXAxisOffset(double halfWidth, InstanceDefinition blockDefinition)
+        {
+            var lastObj = blockDefinition.GetObjects().LastOrDefault();
+            return lastObj == null ? 0 :
+                 lastObj.Geometry.GetBoundingBox(false).Max.X + Block.Spacing + halfWidth;
+        }
+
         /// <summary>
-        /// Deletes the last added block from the scene.
+        /// Deletes the last added box from the block.
         /// </summary>
         public void DeleteLastBox()
         {
@@ -97,7 +166,7 @@ namespace MyRhinoPlugin
         }
 
         /// <summary>
-        /// Deletes all blocks from the scene.
+        /// Deletes all boxes from the block.
         /// </summary>
         public void DeleteAllBoxes()
         {
@@ -131,26 +200,6 @@ namespace MyRhinoPlugin
                 $"Total Volume (m): {totalVolume * 0.001:0.00}\n";
         }
 
-        /// <summary>
-        /// Recenters the camera in all views.
-        /// </summary>
-        public void RecenterCamera()
-        {
-            foreach (var view in _doc.Views)
-            {
-                view.ActiveViewport.ZoomExtents();
-            }
-        }
-
-        internal void DeleteSelectedBlock()
-        {
-            throw new NotImplementedException();
-        }
-
-        internal void RenameSelectedBlock()
-        {
-            throw new NotImplementedException();
-        }
 
         /////   Private Helpers 
 
@@ -175,11 +224,6 @@ namespace MyRhinoPlugin
                 return true;
             }
             return false;
-        }
-
-        internal void CreateBox()
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -12,8 +12,6 @@ namespace MyRhinoPlugin.Commands
 {
     public class AddBoxCommand : Command
     {
-        public BoxSettings Block { get; set; } = new BoxSettings();
-
         public AddBoxCommand()
         {
             Instance = this;
@@ -22,10 +20,65 @@ namespace MyRhinoPlugin.Commands
         ///<summary>The only instance of the MyCommand command.</summary>
         public static AddBoxCommand Instance { get; private set; }
 
+        public class AddBoxParameters
+        {
+            public BoxSettings BoxParameters { get; set; } = new BoxSettings();
+        }
+
+        public AddBoxParameters CommandParameters { get; set; } = new AddBoxParameters();
+
+        public string ActiveInstanceName { get; set; }
+
         public override string EnglishName => "AddBoxCommand";
 
         protected override Result RunCommand(RhinoDoc doc, RunMode mode)
         {
+
+
+            //double halfWidth = Block.HalfWidth;
+            //double halfLength = Block.HalfLength;
+            //double halfHeight = Block.HalfHeight;
+
+            //double X = CalculateNextXAxisOffset(halfWidth, _blocks.LastOrDefault());
+            //double Y = 0;
+            //double Z = 0;
+
+
+
+            //AddBoxCommand.Instance.run
+
+            //var box = new Box(
+            //    new Plane(new Point3d(X, Y, Z), Vector3d.ZAxis),
+            //    new Interval(-halfWidth, halfWidth),
+            //    new Interval(-halfLength, halfLength),
+            //    new Interval(-halfHeight, halfHeight)
+            //);
+
+            //var newBox = new RhinoDocBox()
+            //{
+            //    Box = box,
+            //    DocGuid = _doc.Objects.AddBox(box)
+            //};
+
+            //// Gather all of the selected objects
+            //var idef_index = doc.InstanceDefinitions.Add(idef_name, string.Empty, base_point, geometry, attributes);
+            //if (idef_index < 0)
+            //{
+            //    RhinoApp.WriteLine("Unable to create block definition", idef_name);
+            //    return Result.Failure;
+            //}
+
+
+            //_blocks.Add(newBox);
+
+            //_doc.Views.Redraw();
+
+            var idef = doc.InstanceDefinitions.Find(ActiveInstanceName);
+            //idef.
+               // doc.InstanceDefinitions.
+            //idef.ad
+
+
             // Select objects to define block
             var go = new GetObject();
             go.SetCommandPrompt("Select objects to define block");
@@ -94,6 +147,11 @@ namespace MyRhinoPlugin.Commands
 
             // TODO: complete command.
             return Result.Success;
+        }
+
+        internal void Run(RhinoDoc doc)
+        {
+            throw new NotImplementedException();
         }
     }
 }

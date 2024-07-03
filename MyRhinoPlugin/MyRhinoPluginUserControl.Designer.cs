@@ -30,12 +30,6 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.Windows.Forms.GroupBox groupBox4;
-            tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            buttonBlockAdd = new System.Windows.Forms.Button();
-            buttonBlockDelete = new System.Windows.Forms.Button();
-            buttonBlockRename = new System.Windows.Forms.Button();
-            listBoxBlocks = new System.Windows.Forms.ListBox();
             groupBox3 = new System.Windows.Forms.GroupBox();
             textBoxWidth = new System.Windows.Forms.TextBox();
             blockSettingsBindingSource = new System.Windows.Forms.BindingSource(components);
@@ -51,13 +45,11 @@
             buttonAddBlock = new System.Windows.Forms.Button();
             buttonDeleteLast = new System.Windows.Forms.Button();
             ButtonDeleteAll = new System.Windows.Forms.Button();
-            buttonRecenterCamera = new System.Windows.Forms.Button();
             groupBox1 = new System.Windows.Forms.GroupBox();
             labelStats = new System.Windows.Forms.Label();
             bindingPresenterSource = new System.Windows.Forms.BindingSource(components);
-            groupBox4 = new System.Windows.Forms.GroupBox();
-            groupBox4.SuspendLayout();
-            tableLayoutPanel2.SuspendLayout();
+            textBoxBlockName = new System.Windows.Forms.TextBox();
+            label5 = new System.Windows.Forms.Label();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)blockSettingsBindingSource).BeginInit();
             groupBox2.SuspendLayout();
@@ -65,77 +57,6 @@
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bindingPresenterSource).BeginInit();
             SuspendLayout();
-            // 
-            // groupBox4
-            // 
-            groupBox4.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            groupBox4.Controls.Add(tableLayoutPanel2);
-            groupBox4.Controls.Add(listBoxBlocks);
-            groupBox4.Location = new System.Drawing.Point(5, 3);
-            groupBox4.Name = "groupBox4";
-            groupBox4.Size = new System.Drawing.Size(198, 156);
-            groupBox4.TabIndex = 19;
-            groupBox4.TabStop = false;
-            groupBox4.Text = "Blocks";
-            // 
-            // tableLayoutPanel2
-            // 
-            tableLayoutPanel2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            tableLayoutPanel2.ColumnCount = 3;
-            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 57F));
-            tableLayoutPanel2.Controls.Add(buttonBlockAdd, 0, 0);
-            tableLayoutPanel2.Controls.Add(buttonBlockDelete, 2, 0);
-            tableLayoutPanel2.Controls.Add(buttonBlockRename, 1, 0);
-            tableLayoutPanel2.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.AddColumns;
-            tableLayoutPanel2.Location = new System.Drawing.Point(6, 122);
-            tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 1;
-            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new System.Drawing.Size(186, 28);
-            tableLayoutPanel2.TabIndex = 12;
-            // 
-            // buttonBlockAdd
-            // 
-            buttonBlockAdd.Location = new System.Drawing.Point(3, 3);
-            buttonBlockAdd.Name = "buttonBlockAdd";
-            buttonBlockAdd.Size = new System.Drawing.Size(45, 22);
-            buttonBlockAdd.TabIndex = 9;
-            buttonBlockAdd.Text = "New";
-            buttonBlockAdd.UseVisualStyleBackColor = true;
-            buttonBlockAdd.Click += buttonBlockAdd_Click;
-            // 
-            // buttonBlockDelete
-            // 
-            buttonBlockDelete.Location = new System.Drawing.Point(131, 3);
-            buttonBlockDelete.Name = "buttonBlockDelete";
-            buttonBlockDelete.Size = new System.Drawing.Size(50, 22);
-            buttonBlockDelete.TabIndex = 10;
-            buttonBlockDelete.Text = "Delete";
-            buttonBlockDelete.UseVisualStyleBackColor = true;
-            buttonBlockDelete.Click += buttonBlockDelete_Click;
-            // 
-            // buttonBlockRename
-            // 
-            buttonBlockRename.Location = new System.Drawing.Point(54, 3);
-            buttonBlockRename.Name = "buttonBlockRename";
-            buttonBlockRename.Size = new System.Drawing.Size(71, 22);
-            buttonBlockRename.TabIndex = 11;
-            buttonBlockRename.Text = "Rename";
-            buttonBlockRename.UseVisualStyleBackColor = true;
-            buttonBlockRename.Click += buttonBlockRename_Click;
-            // 
-            // listBoxBlocks
-            // 
-            listBoxBlocks.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            listBoxBlocks.FormattingEnabled = true;
-            listBoxBlocks.ItemHeight = 15;
-            listBoxBlocks.Location = new System.Drawing.Point(6, 22);
-            listBoxBlocks.Name = "listBoxBlocks";
-            listBoxBlocks.Size = new System.Drawing.Size(186, 94);
-            listBoxBlocks.TabIndex = 0;
             // 
             // groupBox3
             // 
@@ -148,7 +69,7 @@
             groupBox3.Controls.Add(textBoxSpacing);
             groupBox3.Controls.Add(label4);
             groupBox3.Controls.Add(textBoxLength);
-            groupBox3.Location = new System.Drawing.Point(5, 409);
+            groupBox3.Location = new System.Drawing.Point(5, 327);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new System.Drawing.Size(198, 160);
             groupBox3.TabIndex = 19;
@@ -239,9 +160,9 @@
             // 
             groupBox2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             groupBox2.Controls.Add(tableLayoutPanel1);
-            groupBox2.Location = new System.Drawing.Point(5, 298);
+            groupBox2.Location = new System.Drawing.Point(5, 194);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new System.Drawing.Size(198, 105);
+            groupBox2.Size = new System.Drawing.Size(198, 127);
             groupBox2.TabIndex = 20;
             groupBox2.TabStop = false;
             groupBox2.Text = "Commands";
@@ -249,20 +170,19 @@
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            tableLayoutPanel1.ColumnCount = 2;
+            tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             tableLayoutPanel1.Controls.Add(buttonAddBlock, 0, 0);
             tableLayoutPanel1.Controls.Add(buttonDeleteLast, 1, 0);
             tableLayoutPanel1.Controls.Add(ButtonDeleteAll, 1, 1);
-            tableLayoutPanel1.Controls.Add(buttonRecenterCamera, 0, 1);
             tableLayoutPanel1.Location = new System.Drawing.Point(6, 22);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 42.3076935F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 57.6923065F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(185, 78);
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.6666679F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.3333321F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            tableLayoutPanel1.Size = new System.Drawing.Size(185, 99);
             tableLayoutPanel1.TabIndex = 5;
             // 
             // buttonAddBlock
@@ -271,7 +191,7 @@
             buttonAddBlock.Location = new System.Drawing.Point(4, 3);
             buttonAddBlock.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             buttonAddBlock.Name = "buttonAddBlock";
-            buttonAddBlock.Size = new System.Drawing.Size(84, 27);
+            buttonAddBlock.Size = new System.Drawing.Size(177, 27);
             buttonAddBlock.TabIndex = 0;
             buttonAddBlock.Text = "Add";
             buttonAddBlock.UseVisualStyleBackColor = true;
@@ -280,10 +200,10 @@
             // buttonDeleteLast
             // 
             buttonDeleteLast.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            buttonDeleteLast.Location = new System.Drawing.Point(96, 3);
+            buttonDeleteLast.Location = new System.Drawing.Point(4, 37);
             buttonDeleteLast.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             buttonDeleteLast.Name = "buttonDeleteLast";
-            buttonDeleteLast.Size = new System.Drawing.Size(85, 27);
+            buttonDeleteLast.Size = new System.Drawing.Size(177, 27);
             buttonDeleteLast.TabIndex = 1;
             buttonDeleteLast.Text = "Delete Last";
             buttonDeleteLast.UseVisualStyleBackColor = true;
@@ -291,30 +211,19 @@
             // ButtonDeleteAll
             // 
             ButtonDeleteAll.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            ButtonDeleteAll.Location = new System.Drawing.Point(96, 36);
+            ButtonDeleteAll.Location = new System.Drawing.Point(4, 71);
             ButtonDeleteAll.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ButtonDeleteAll.Name = "ButtonDeleteAll";
-            ButtonDeleteAll.Size = new System.Drawing.Size(85, 39);
+            ButtonDeleteAll.Size = new System.Drawing.Size(177, 25);
             ButtonDeleteAll.TabIndex = 2;
             ButtonDeleteAll.Text = "Delete All";
             ButtonDeleteAll.UseVisualStyleBackColor = true;
-            // 
-            // buttonRecenterCamera
-            // 
-            buttonRecenterCamera.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            buttonRecenterCamera.Location = new System.Drawing.Point(4, 36);
-            buttonRecenterCamera.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            buttonRecenterCamera.Name = "buttonRecenterCamera";
-            buttonRecenterCamera.Size = new System.Drawing.Size(84, 39);
-            buttonRecenterCamera.TabIndex = 4;
-            buttonRecenterCamera.Text = "Recenter Camera";
-            buttonRecenterCamera.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
             groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             groupBox1.Controls.Add(labelStats);
-            groupBox1.Location = new System.Drawing.Point(5, 165);
+            groupBox1.Location = new System.Drawing.Point(5, 61);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new System.Drawing.Size(198, 127);
             groupBox1.TabIndex = 18;
@@ -331,18 +240,36 @@
             labelStats.TabIndex = 0;
             labelStats.Text = "label5";
             // 
+            // textBoxBlockName
+            // 
+            textBoxBlockName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            textBoxBlockName.DataBindings.Add(new System.Windows.Forms.Binding("Text", bindingPresenterSource, "BlockName", true));
+            textBoxBlockName.Location = new System.Drawing.Point(4, 32);
+            textBoxBlockName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBoxBlockName.Name = "textBoxBlockName";
+            textBoxBlockName.Size = new System.Drawing.Size(199, 23);
+            textBoxBlockName.TabIndex = 21;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(5, 14);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(74, 15);
+            label5.TabIndex = 1;
+            label5.Text = "Block Name:";
+            // 
             // MyRhinoPluginUserControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            Controls.Add(groupBox4);
+            Controls.Add(label5);
+            Controls.Add(textBoxBlockName);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Name = "MyRhinoPluginUserControl";
-            Size = new System.Drawing.Size(206, 599);
-            groupBox4.ResumeLayout(false);
-            tableLayoutPanel2.ResumeLayout(false);
+            Size = new System.Drawing.Size(206, 502);
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)blockSettingsBindingSource).EndInit();
@@ -352,6 +279,7 @@
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)bindingPresenterSource).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -373,13 +301,8 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label labelStats;
         private System.Windows.Forms.BindingSource bindingPresenterSource;
-        private System.Windows.Forms.Button buttonRecenterCamera;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Button buttonBlockDelete;
-        private System.Windows.Forms.Button buttonBlockAdd;
-        private System.Windows.Forms.ListBox listBoxBlocks;
-        private System.Windows.Forms.Button buttonBlockRename;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TextBox textBoxBlockName;
+        private System.Windows.Forms.Label label5;
     }
 }
