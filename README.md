@@ -1,3 +1,11 @@
+# Additional Changes Overview
+- Changed plugin to be accessible as a panel. 
+- Will now modify a block definition instead of directly adding boxes to the active doc.
+- Can change which block definition to modify.
+- Removed Recenter Camera (no longer required now that the plugin no longer prevents interaction with Rhino).
+
+I spent an additional 7-8 hrs on the changes. The first half of which was spent on changing the plugin to use panels instead of windows. The second half was spent modifying the plugin to store boxes in blocks and manage those blocks.
+
 # Changes Overview
 - Implemented in WinForms.
 - Requested: Add, Delete last, Delete All, Statistics (Number of blocks, total volume and area), commenting. 
