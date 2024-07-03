@@ -36,7 +36,6 @@ namespace MyRhinoPlugin
         public string Stats { get => _stats; private set => SetProperty(ref _stats, value); }
         private string _stats = string.Empty;
 
-        private List<RhinoDocBox> _blocks = new List<RhinoDocBox>();
         private RhinoDoc _doc;
         private Guid visualizeInstGuid;
 
@@ -197,47 +196,30 @@ namespace MyRhinoPlugin
         /// </summary>
         public void UpdateStats()
         {
-            var totalArea = 0d;
-            var totalVolume = 0d;
+            double totalArea = 0d;
+            double totalVolume = 0d;
+            int totalBlockCount = 0;
 
-            foreach (var block in _blocks)
+            var blockDefinition = _doc.InstanceDefinitions.Find(_blockName);
+            if (blockDefinition != null)
             {
-                totalArea += block.Box.Area;
-                totalVolume += block.Box.Volume;
+                totalBlockCount = blockDefinition.ObjectCount;
+                var blockObjects = blockDefinition.GetObjects();
+                foreach (var block in blockObjects)
+                {
+                    // GetBoundingBox is a bit of a hack.
+                    var boundingBox = block.Geometry.GetBoundingBox(false);
+                    totalArea += boundingBox.Area;
+                    totalVolume += boundingBox.Volume;
+                }
             }
 
             Stats =
-                $"Block Count: {_blocks.Count}\n" +
+                $"Block Count: {totalBlockCount}\n" +
                 $"Total Area (mm): {totalArea}\n" +
                 $"Total Volume (mm): {totalVolume}\n" +
                 $"Total Area (m): {totalArea * 0.001:0.00}\n" +
                 $"Total Volume (m): {totalVolume * 0.001:0.00}\n";
-        }
-
-
-        /////   Private Helpers 
-
-        private double CalculateNextXAxisOffset(double halfWidth, RhinoDocBox previousBlock)
-        {
-            return previousBlock == null ? 0 :
-                 previousBlock.Box.BoundingBox.Max.X + Block.Spacing + halfWidth;
-        }
-
-        private bool TryDeleteLastBlock()
-        {
-            if (_blocks.Count == 0) 
-                return false;
-
-            var lastAddedObject = _blocks.Last();
-            _blocks.RemoveAt(_blocks.Count - 1);
-
-            var rhinoObj = _doc.Objects.Find(lastAddedObject.DocGuid);
-            if (rhinoObj != null)
-            {
-                _doc.Objects.Delete(rhinoObj);
-                return true;
-            }
-            return false;
         }
     }
 }
